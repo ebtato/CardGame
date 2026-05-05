@@ -13,6 +13,10 @@ public class Player {
         isFrozen = false;
     }
 
+    public void playRandomCardFromHand() {
+
+    }
+
     public void addCardToHand(Card card) {
         hand.add(card);
     }

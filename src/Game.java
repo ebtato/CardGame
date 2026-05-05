@@ -7,6 +7,7 @@ public class Game {
     // Player settings
     private int startingHandSize;
     private float playerChancesOfPlayingCard; // % chance (0-1) that a player plays a card from their hand
+    private float playerChancesOfDrawingFromDamageDeck;
 
     // Deck settings
     private int totalNumberOfCards;
@@ -34,6 +35,7 @@ public class Game {
         // Player settings
         startingHandSize = 3;
         playerChancesOfPlayingCard = 0.5f; // 50% play card, 50% draw card
+        playerChancesOfDrawingFromDamageDeck = 0.4f;
 
         // Deck settings
         totalNumberOfCards = 30;
@@ -106,25 +108,48 @@ public class Game {
         while (cardsAdded < startingHandSize) {
             for (int i = 0; i < players.size(); i++) {
                 int randomCardIndex = Rand.randomInt(0, mixedDeck.size());
-                mixedDeck.remove(randomCardIndex);
                 Card randomCard = mixedDeck.get(randomCardIndex);
+                mixedDeck.remove(randomCardIndex);
                 players.get(i).addCardToHand(randomCard);
             }
             cardsAdded += 1;
         }
 
+        Player currentPlayer = players.get(0);
+
         // game loop -- loop as long as either deck has cards
+
         while (mixedDeck.size() > 0 || damageDeck.size() > 0) {
             if (Rand.random() < playerChancesOfPlayingCard) {
-                // play a card
-
+                // play a card from player's hand
+                currentPlayer.playRandomCardFromHand();
             }
             else {
                 // draw a card
+                Card drawnCard;
 
+                // draw a card from damage deck
+                if (Rand.random() < playerChancesOfDrawingFromDamageDeck) {
+                    if (damageDeck.size() > 0) {
+                        int damageCardIndex = Rand.randomInt(0, damageDeck.size());
+                        drawnCard = (Card)damageDeck.get(damageCardIndex);
+                        damageDeck.remove(damageCardIndex);
+                    }
+                    else {
+                        int mixedCardIndex = Rand.randomInt(0, mixedDeck.size());
+                        drawnCard = mixedDeck.get(mixedCardIndex);
+                        mixedDeck.remove(mixedCardIndex);
+                    }
+                }
+                else {
+                    int mixedCardIndex = Rand.randomInt(0, mixedDeck.size());
+                    drawnCard = mixedDeck.get(mixedCardIndex);
+                    mixedDeck.remove(mixedCardIndex);
+                }
+
+                currentPlayer.addCardToHand(drawnCard);
             }
         }
-
     }
 
 }
