@@ -23,4 +23,13 @@ space race:
     - be the first one into space
     - build your rocket and successfully launch it before the other party
 
+
+--- full rules for this game ---
+- object of the game is to be the first one to build and launch rocket
+- turn system the same as base
+- rocket progress is based on pts; more pts = more progress
+- when a rocket is built and ready for launch, a launch card must be drawn and played.
+    - if the launch card is SUCCESS then the player wins.
+    - if the launch card is FAILURE then the player loses progress.
+
 --- other things i haven't thought of yet ---
