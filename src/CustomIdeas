@@ -32,4 +32,13 @@ space race:
     - if the launch card is SUCCESS then the player wins.
     - if the launch card is FAILURE then the player loses progress.
 
---- other things i haven't thought of yet ---
+=== THINGS TO BE DONE ===
+retexture base
+nuclear scare
+sabotage
+rocket failure
+spy
+launch
+pt thresholds (rocket test)
+variable chances of drawing cards
+    (different choices during game affect chances of drawing good/bad cards)
