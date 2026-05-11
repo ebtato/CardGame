@@ -14,13 +14,13 @@ public class ThiefCard extends Card {
         currentPlayer.addPoints(super.getPointValue());
 
         System.out.println(currentPlayer.getName() + " played " + this);
-        System.out.println(currentPlayer.getName() + " now has " + currentPlayer.getNumPoints() + " points.");
+        System.out.println(currentPlayer.getName() + " now has " + currentPlayer.getNumPoints() + " progress points.");
 
         // move a card from a target player to a new player
 
         // 1. choose a target player (and not oneself)
         if (allPlayers.size() < 2) {
-            System.out.println("Error: No other players for the ThiefCard to steal from.");
+            System.out.println("Error: No other players for the Spy Card to steal from.");
             return;
         }
 
@@ -50,6 +50,6 @@ public class ThiefCard extends Card {
 
     @Override
     public String toString() {
-        return "Thief Card { point value: " + super.getPointValue() + "}";
+        return "SPY CARD { point value: " + super.getPointValue() + "}";
     }
 }

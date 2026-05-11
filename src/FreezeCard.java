@@ -23,7 +23,7 @@ public class FreezeCard extends Card implements DealsDamage, AppliesFreeze {
         currentPlayer.addPoints(super.getPointValue());
 
         System.out.println(currentPlayer.getName() + " played " + this);
-        System.out.println(currentPlayer.getName() + " now has " + currentPlayer.getNumPoints() + " points.");
+        System.out.println(currentPlayer.getName() + " now has " + currentPlayer.getNumPoints() + " progress points.");
 
         // choose a target player (and not the current player)
         if (allPlayers.size() < 2) {
@@ -57,7 +57,7 @@ public class FreezeCard extends Card implements DealsDamage, AppliesFreeze {
     public void doDamage(Player currentPlayer, Player playerToDamage) {
         playerToDamage.removePoints(damage);
         System.out.println(currentPlayer.getName() + " did " + damage + " damage to " + playerToDamage.getName() + ".");
-        System.out.println(playerToDamage.getName() + " now has " + playerToDamage.getNumPoints() + " points.\n");
+        System.out.println(playerToDamage.getName() + " now has " + playerToDamage.getNumPoints() + " progress points.\n");
     }
 
     @Override
