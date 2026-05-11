@@ -20,6 +20,11 @@ public class Game {
 
     private float chancesOfDamageCardBeingInDamageDeck; // % chance of a generated damage card being added to the damage-only deck
 
+    // Win Condition settings
+    private int pointsToWin;
+    private float testThreshold1;
+    private float testThreshold2;
+
     // -------- End of Settings ------- //
 
 
@@ -32,6 +37,22 @@ public class Game {
     // ------ End of Game Objects ----- //
 
 
+    public int getPointsToWin() { return pointsToWin; }
+    public float getTestThreshold(int i){
+        switch(i){
+            case 1:
+                return testThreshold1;
+                break;
+
+            case 2:
+                return testThreshold2;
+                break;
+
+            default:
+                System.out.println("Error: testThreshold"+i+" not found.");
+                return 0;
+        }
+    }
 
     public Game() {
         // Set game settings
@@ -182,6 +203,12 @@ public class Game {
         if (thiefCardChances < 0f) {
             System.out.println("ERROR: Card chances are not all positive.");
         }
+
+        // Win Condition settings
+        pointsToWin = 30;
+        // two test thresholds, at 1/3 progress and 2/3 progress
+        testThreshold1 = pointsToWin/3;
+        testThreshold2 = (2*pointsToWin)/3;
     }
 
     // Populates the two ArrayLists with random Cards, according to the settings.

@@ -33,7 +33,7 @@ space race:
     - if the launch card is FAILURE then the player loses progress.
 
 === THINGS TO BE DONE ===
-retexture base
+retexture base v
 nuclear scare
 sabotage
 rocket failure
@@ -42,3 +42,4 @@ launch
 pt thresholds (rocket test)
 variable chances of drawing cards
     (different choices during game affect chances of drawing good/bad cards)
+change win condition to pts, not empty draw pile.
