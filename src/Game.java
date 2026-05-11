@@ -100,11 +100,17 @@ public class Game {
                 currentPlayer.playRandomCardFromHand(players);
             }
 
-            // 2. OR draw a card from mixed deck (but don't play it yet)
+            // 2. OR draw a card from mixed deck
             else if (damageDeck.size() == 0 || (mixedDeck.size() > 0 && randomValue < playerChancesOfPlayingCard + playerChancesOfDrawingFromMixedDeck)) {
                 Object drawnObject = drawRandomCard(mixedDeck);
                 Card drawnCard = (Card)drawnObject;
+
+                // if card drawn is an attack card, then play immediately
+
+
+                // else, add card to hand
                 currentPlayer.addCardToHand(drawnCard);
+
 
                 System.out.println(currentPlayer.getName() + " drew a " + drawnCard + " from the Mixed deck.");
             }
@@ -188,6 +194,7 @@ public class Game {
             if (randomValue < pointCardChances) {
                 mixedDeck.add(new PointCard());
             }
+
 
             // % chance of creating an attack card
            /* else if (randomValue < pointCardChances + attackCardChances) {

@@ -1,3 +1,7 @@
+// should work correctly and be on theme(ish)
+
+
+
 import java.util.ArrayList;
 
 public abstract class AttackCard extends Card implements DealsDamage {
