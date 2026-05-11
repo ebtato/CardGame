@@ -33,3 +33,5 @@ space race:
     - if the launch card is FAILURE then the player loses progress.
 
 --- other things i haven't thought of yet ---
+- rushing (draw 2 cards? draw from different deck?)
+- testing at thresholds (separate launch draw piles)

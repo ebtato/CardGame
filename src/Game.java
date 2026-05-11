@@ -190,7 +190,7 @@ public class Game {
             }
 
             // % chance of creating an attack card
-            else if (randomValue < pointCardChances + attackCardChances) {
+           /* else if (randomValue < pointCardChances + attackCardChances) {
                 AttackCard newAttackCard = new AttackCard();
 
                 if (Rand.random() < chancesOfDamageCardBeingInDamageDeck) {
@@ -198,7 +198,7 @@ public class Game {
                 } else {
                     mixedDeck.add(newAttackCard);
                 }
-            }
+            } */
 
             // % chance of creating a freeze card
             else if (randomValue < pointCardChances + attackCardChances + freezeCardChances) {
