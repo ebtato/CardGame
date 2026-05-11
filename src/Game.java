@@ -31,7 +31,11 @@ public class Game {
 
     // ------ End of Game Objects ----- //
 
+    // --------- Debugging Variables --------- //
 
+    private Card forceCardInMixedDeck = new NuclearScareCard();
+
+    // --------- End of Debugging Variables --------- //
 
     public Game() {
         // Set game settings
@@ -186,8 +190,15 @@ public class Game {
 
     // Populates the two ArrayLists with random Cards, according to the settings.
     private void generateDecks() {
-        for (int i = 0; i < totalNumberOfCards; i++) {
+        if (!forceCardInMixedDeck.equals(null)) {
+            System.err.println("DEBUG: Forced card added");
+            mixedDeck.add(forceCardInMixedDeck);
+        }
+      for (int i = 0; i < totalNumberOfCards; i++) {
+            // --------- Debugging Code --------- //
 
+
+            // --------- End of Debugging Code --------- //
             float randomValue = Rand.random(); // 0.0 -> 0.999...
 
             // % chance of creating a point card
@@ -220,7 +231,7 @@ public class Game {
 
             // % chance of creating a thief card
             else {
-                mixedDeck.add(new ThiefCard());
+                mixedDeck.add(new NuclearScareCard());
             }
         }
     }

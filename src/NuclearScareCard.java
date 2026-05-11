@@ -50,4 +50,10 @@ public class NuclearScareCard extends Card implements DealsDamage {
         System.out.println(currentPlayer.getName() + " did " + damage + " damage to " + playerToDamage.getName() + ". " + "(Points after: " + playerToDamage.getNumPoints() + ")");
 //        System.out.println(playerToDamage.getName() + " now has " + playerToDamage.getNumPoints() + " points.\n");
     }
+
+    @Override
+    public String toString() {
+        return "Nuclear Scare Card { point value: " + super.getPointValue() + ", damage: Variable}";
+    }
+
 }
