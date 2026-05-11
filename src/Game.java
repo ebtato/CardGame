@@ -87,7 +87,7 @@ public class Game {
 
             // check if the player should be skipped
             if (currentPlayer.isFrozen()) {
-                System.out.println(currentPlayer.getName() + " is frozen! Skipping turn.");
+                System.out.println(currentPlayer.getName() + " is rebuilding! Skipping turn.");
                 currentPlayer.unfreeze();
                 continue; // skips the rest of the body of the loop, and returns to the start of the loop
             }

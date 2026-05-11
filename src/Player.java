@@ -96,7 +96,7 @@ public class Player {
         System.out.println(" | ----- " + name + " ----- ");
         System.out.println(" | Points: " + numPoints);
         if (isFrozen) {
-            System.out.println(" | *FROZEN*");
+            System.out.println(" | *REBUILDING*");
         }
         System.out.println(" | Cards in hand:");
         for (int i = 0; i < hand.size(); i++) {

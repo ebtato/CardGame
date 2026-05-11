@@ -17,11 +17,11 @@ public class PointCard extends Card {
         currentPlayer.addPoints(super.getPointValue());
 
         System.out.println(currentPlayer.getName() + " played " + this);
-        System.out.println(currentPlayer.getName() + " now has " + currentPlayer.getNumPoints() + " points.");
+        System.out.println(currentPlayer.getName() + " now has " + currentPlayer.getNumPoints() + " progress points.");
     }
 
     @Override
     public String toString() {
-        return "Point Card { point value: " + super.getPointValue() + "}";
+        return "Progress Card { point value: " + super.getPointValue() + "}";
     }
 }
