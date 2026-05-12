@@ -47,16 +47,18 @@ public class Game {
             return testThreshold2;
         }
         else{
-            System.out.println("Error: testThreshold"+i+" does not exist. Returning 0f");
+            System.out.println("Error: testThreshold "+i+" does not exist. Returning 0f");
             return 0f;
         }
     }
 
-    // Forces a card in the mixedDeck. Causes mixedDeck size to be i + 1, set to `null` if unwanted.
-    private Card forceCardInMixedDeck = new NuclearScareCard();
+    // Forces a card in the mixedDeck. Causes mixedDeck size to be i + 1. Set to `null` if unwanted.
+    // Syntax example: private Card forceCardInMixedDeck = new NuclearScareCard();
+    private Card forceCardInMixedDeck = null;
 
     // Forces all cards in mixedDeck to be allMixedCardOfType.getClass(). Set to `null` if unwanted.
-    private Card allMixedCardOfType = new NuclearScareCard();
+    // Syntax example: private Card allMixedCardOfType = new NuclearScareCard();
+    private Card allMixedCardOfType = null;
 
     // --------- End of Debugging Variables --------- //
 
@@ -217,8 +219,11 @@ public class Game {
         // -------- Debugging Code -----------
         if (forceCardInMixedDeck != null) {
             mixedDeck.add(forceCardInMixedDeck);
+            System.err.println("DEBUG: Card of type {" + forceCardInMixedDeck.getClass() + "} was forced in mixedDeck.");
         }
         if (allMixedCardOfType != null) {
+            System.err.println("DEBUG: Card of type {" + forceCardInMixedDeck.getClass() + "} makes up all of mixedDeck.");
+
             for (int i = 0; i < totalNumberOfCards; i++) {
                 mixedDeck.add(allMixedCardOfType);
             }
