@@ -36,6 +36,7 @@ public class Game {
 
     // ------ End of Game Objects ----- //
 
+    // --------- Debugging Variables --------- //
 
     public int getPointsToWin() { return pointsToWin; }
     public float getTestThreshold(int i){
@@ -50,6 +51,9 @@ public class Game {
             return 0f;
         }
     }
+    private Card forceCardInMixedDeck = new NuclearScareCard();
+
+    // --------- End of Debugging Variables --------- //
 
     public Game() {
         // Set game settings
@@ -159,20 +163,6 @@ public class Game {
                 }
             }
 
-            // check for rocket test phase
-            if(currentPlayer.getNumPoints() >= testThreshold1 && currentPlayer.getTotRocketTests() < 1){
-                currentPlayer.testRocket();
-            }
-            else if(currentPlayer.getNumPoints() < testThreshold1 && currentPlayer.getTotRocketTests() >= 1){
-                currentPlayer.setBackTestProgress();
-            }
-            else if(currentPlayer.getNumPoints() >= testThreshold2 && currentPlayer.getTotRocketTests() < 2){
-                currentPlayer.testRocket();
-            }
-            else if(currentPlayer.getNumPoints() < testThreshold2 && currentPlayer.getTotRocketTests() >= 2){
-                currentPlayer.setBackTestProgress();
-            }
-
             Input.waitForUserToPressEnter("\nPress Enter to end " + currentPlayer.getName() + "'s turn.\n");
         }
 
@@ -214,12 +204,6 @@ public class Game {
         if (thiefCardChances < 0f) {
             System.out.println("ERROR: Card chances are not all positive.");
         }
-
-        // Win Condition settings
-        pointsToWin = 30;
-        // two test thresholds, at 1/3 progress and 2/3 progress
-        testThreshold1 = pointsToWin/3;
-        testThreshold2 = (2*pointsToWin)/3;
     }
 
     // Populates the two ArrayLists with random Cards, according to the settings.
