@@ -7,6 +7,7 @@
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class NuclearScareCard extends Card implements DealsDamage {
     private int damage; // amount of points subtracted from everyone else
@@ -37,10 +38,17 @@ public class NuclearScareCard extends Card implements DealsDamage {
             System.out.println("Error: No other players for the NuclearScareCard to inflict damage.");
             return;
         }
+
+        // afflictedPlayers list, pretty suboptimal but for some reason this card attacks certain subjects twice
+        List<Player> afflictedPlayers = new  ArrayList<Player>();
         for (Player afflictedPlayer : allPlayers) {
-            if (afflictedPlayer.equals(currentPlayer)) continue;
-            doDamage(currentPlayer, afflictedPlayer);
-        }
+            if (afflictedPlayer.equals(currentPlayer) || afflictedPlayers.contains(afflictedPlayer)) {
+                continue;
+            } else {
+                doDamage(currentPlayer, afflictedPlayer);
+                afflictedPlayers.add(afflictedPlayer);
+            }
+          }
 
     }
 

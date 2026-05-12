@@ -25,19 +25,6 @@ public class Game {
     private float testThreshold1;
     private float testThreshold2;
 
-    public int getPointsToWin() { return pointsToWin; }
-    public float getTestThreshold(int i){
-        if(i == 1){
-            return testThreshold1;
-        }
-        else if(i == 2){
-            return testThreshold2;
-        }
-        else{
-            System.out.println("Error: testThreshold"+i+" does not exist. Returning 0f");
-            return 0f;
-        }
-    }
     // -------- End of Settings ------- //
 
 
@@ -51,8 +38,27 @@ public class Game {
 
     // --------- Debugging Variables --------- //
 
+    public int getPointsToWin() { return pointsToWin; }
+    public float getTestThreshold(int i){
+        if(i == 1){
+            return testThreshold1;
+        }
+        else if(i == 2){
+            return testThreshold2;
+        }
+        else{
+            System.out.println("Error: testThreshold "+i+" does not exist. Returning 0f");
+            return 0f;
+        }
+    }
 
-    private Card forceCardInMixedDeck = new NuclearScareCard();
+    // Forces a card in the mixedDeck. Causes mixedDeck size to be i + 1. Set to `null` if unwanted.
+    // Syntax example: private Card forceCardInMixedDeck = new NuclearScareCard();
+    private Card forceCardInMixedDeck = null;
+
+    // Forces all cards in mixedDeck to be allMixedCardOfType.getClass(). Set to `null` if unwanted.
+    // Syntax example: private Card allMixedCardOfType = new NuclearScareCard();
+    private Card allMixedCardOfType = null;
 
     // --------- End of Debugging Variables --------- //
 
