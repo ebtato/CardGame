@@ -25,19 +25,6 @@ public class Game {
     private float testThreshold1;
     private float testThreshold2;
 
-    // -------- End of Settings ------- //
-
-
-    // --------- Game Objects --------- //
-
-    private ArrayList<Player> players;
-    private ArrayList<Card> mixedDeck; // contains a mix of all types of cards
-    private ArrayList<DealsDamage> damageDeck; // contains only cards that implement DealsDamage
-
-    // ------ End of Game Objects ----- //
-
-    // --------- Debugging Variables --------- //
-
     public int getPointsToWin() { return pointsToWin; }
     public float getTestThreshold(int i){
         if(i == 1){
@@ -51,6 +38,20 @@ public class Game {
             return 0f;
         }
     }
+    // -------- End of Settings ------- //
+
+
+    // --------- Game Objects --------- //
+
+    private ArrayList<Player> players;
+    private ArrayList<Card> mixedDeck; // contains a mix of all types of cards
+    private ArrayList<DealsDamage> damageDeck; // contains only cards that implement DealsDamage
+
+    // ------ End of Game Objects ----- //
+
+    // --------- Debugging Variables --------- //
+
+
     private Card forceCardInMixedDeck = new NuclearScareCard();
 
     // --------- End of Debugging Variables --------- //
