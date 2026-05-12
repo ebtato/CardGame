@@ -51,7 +51,12 @@ public class Game {
             return 0f;
         }
     }
+
+    // Forces a card in the mixedDeck. Causes mixedDeck size to be i + 1, set to `null` if unwanted.
     private Card forceCardInMixedDeck = new NuclearScareCard();
+
+    // Forces all cards in mixedDeck to be allMixedCardOfType.getClass(). Set to `null` if unwanted.
+    private Card allMixedCardOfType = new NuclearScareCard();
 
     // --------- End of Debugging Variables --------- //
 
@@ -208,6 +213,20 @@ public class Game {
 
     // Populates the two ArrayLists with random Cards, according to the settings.
     private void generateDecks() {
+
+        // -------- Debugging Code -----------
+        if (forceCardInMixedDeck != null) {
+            mixedDeck.add(forceCardInMixedDeck);
+        }
+        if (allMixedCardOfType != null) {
+            for (int i = 0; i < totalNumberOfCards; i++) {
+                mixedDeck.add(allMixedCardOfType);
+            }
+            return;
+        }
+        // -------- End of Debugging Code -----------
+
+
         for (int i = 0; i < totalNumberOfCards; i++) {
 
             float randomValue = Rand.random(); // 0.0 -> 0.999...
