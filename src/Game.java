@@ -39,18 +39,15 @@ public class Game {
 
     public int getPointsToWin() { return pointsToWin; }
     public float getTestThreshold(int i){
-        switch(i){
-            case 1:
-                return testThreshold1;
-                break;
-
-            case 2:
-                return testThreshold2;
-                break;
-
-            default:
-                System.out.println("Error: testThreshold"+i+" not found.");
-                return 0;
+        if(i == 1){
+            return testThreshold1;
+        }
+        else if(i == 2){
+            return testThreshold2;
+        }
+        else{
+            System.out.println("Error: testThreshold"+i+" does not exist. Returning 0f");
+            return 0f;
         }
     }
 
@@ -160,6 +157,20 @@ public class Game {
                     AppliesFreeze freezeCard = (AppliesFreeze)damageCard;
                     freezeCard.freeze(currentPlayer, otherPlayer);
                 }
+            }
+
+            // check for rocket test phase
+            if(currentPlayer.getNumPoints() >= testThreshold1 && currentPlayer.getTotRocketTests() < 1){
+                currentPlayer.testRocket();
+            }
+            else if(currentPlayer.getNumPoints() < testThreshold1 && currentPlayer.getTotRocketTests() >= 1){
+                currentPlayer.setBackTestProgress();
+            }
+            else if(currentPlayer.getNumPoints() >= testThreshold2 && currentPlayer.getTotRocketTests() < 2){
+                currentPlayer.testRocket();
+            }
+            else if(currentPlayer.getNumPoints() < testThreshold2 && currentPlayer.getTotRocketTests() >= 2){
+                currentPlayer.setBackTestProgress();
             }
 
             Input.waitForUserToPressEnter("\nPress Enter to end " + currentPlayer.getName() + "'s turn.\n");

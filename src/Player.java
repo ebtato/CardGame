@@ -6,6 +6,10 @@ public class Player {
     private int numPoints;
     private boolean isFrozen;
 
+    private int totRocketTests;
+
+    public int getTotRocketTests(){ return totRocketTests; }
+
     public Player(String name) {
         this.name = name;
         hand = new ArrayList<Card>();
@@ -42,6 +46,23 @@ public class Player {
             AppliesFreeze freezeCard = (AppliesFreeze)randomCard;
             freezeCard.freeze(this, otherPlayer);
         }
+    }
+
+    public void testRocket(){
+        // "draw" test card from "draw pile"
+        // not a real draw pile, but simply a probability of successful or failed test
+        // that way certain in-game decisions can affect the chances of good/bad tests
+        // simulates adding good/bad cards to the pile to change probabilities,
+        // without actually adding cards to a pile and giving each player a separate draw pile.
+
+        System.out.println("Rocket Test Performed");
+
+        totRocketTests++;
+    }
+
+    public void setBackTestProgress(){
+        System.out.println("Pushed back one phase");
+        totRocketTests--;
     }
 
     public boolean hasCardsInHand() {
