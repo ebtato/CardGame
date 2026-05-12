@@ -170,6 +170,20 @@ public class Game {
                 }
             }
 
+            // check for rocket test phase
+            if(currentPlayer.getNumPoints() >= testThreshold1 && currentPlayer.getTotRocketTests() < 1){
+                currentPlayer.testRocket();
+            }
+            else if(currentPlayer.getNumPoints() < testThreshold1 && currentPlayer.getTotRocketTests() >= 1){
+                currentPlayer.setBackTestProgress();
+            }
+            else if(currentPlayer.getNumPoints() >= testThreshold2 && currentPlayer.getTotRocketTests() < 2){
+                currentPlayer.testRocket();
+            }
+            else if(currentPlayer.getNumPoints() < testThreshold2 && currentPlayer.getTotRocketTests() >= 2){
+                currentPlayer.setBackTestProgress();
+            }
+
             Input.waitForUserToPressEnter("\nPress Enter to end " + currentPlayer.getName() + "'s turn.\n");
         }
 
@@ -211,6 +225,13 @@ public class Game {
         if (thiefCardChances < 0f) {
             System.out.println("ERROR: Card chances are not all positive.");
         }
+
+        pointsToWin = 45;
+
+        testThreshold1 = pointsToWin/3;
+        testThreshold2 = 2*testThreshold1;
+
+        System.out.println(testThreshold1 +" "+testThreshold2)  ;
     }
 
     // Populates the two ArrayLists with random Cards, according to the settings.

@@ -7,14 +7,34 @@ public class Player {
     private boolean isFrozen;
 
     private int totRocketTests;
-
     public int getTotRocketTests(){ return totRocketTests; }
+
+    private float rocketTestFailChance;
+    public float getRocketTestFailChance() { return rocketTestFailChance; }
+    public void addCardToTestDeck(int i){
+        switch (i){
+
+            //add fail card
+            case 0:
+                rocketTestFailChance += 0.05f;
+                break;
+
+            //add success card
+            case 1:
+                rocketTestFailChance -= 0.05f;
+                break;
+            default:
+                System.out.println("Error: card {"+i+"} does not exist.");
+        }
+    }
 
     public Player(String name) {
         this.name = name;
         hand = new ArrayList<Card>();
         numPoints = 5;
         isFrozen = false;
+        // a number between 0 and 1
+        rocketTestFailChance = 0.5f;
     }
 
     public void playRandomCardFromHand(ArrayList<Player> players) {
@@ -54,8 +74,15 @@ public class Player {
         // that way certain in-game decisions can affect the chances of good/bad tests
         // simulates adding good/bad cards to the pile to change probabilities,
         // without actually adding cards to a pile and giving each player a separate draw pile.
+        System.out.println("It's time for "+name+" to test their rocket!");
 
-        System.out.println("Rocket Test Performed");
+        float num = Rand.randomFloat(0f,1f);
+        if(num < rocketTestFailChance){
+            System.out.println("ROCKET TEST FAILED!");
+        }
+        else{
+            System.out.println("Rocket Test Success!");
+        }
 
         totRocketTests++;
     }
