@@ -30,7 +30,7 @@ public abstract class AttackCard extends Card implements DealsDamage {
     @Override
     public void doDamage(Player currentPlayer, Player playerToDamage) {
         currentPlayer.removePoints(attackDamage);
-        System.out.println("\n" + currentPlayer.getName() + " took " + attackDamage + " .");
+        System.out.println("\n" + currentPlayer.getName() + " took " + attackDamage + " points damage.");
         System.out.println(currentPlayer.getName() + " now has " + currentPlayer.getNumPoints() + " points.\n");
     }
 
