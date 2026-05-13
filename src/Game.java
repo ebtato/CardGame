@@ -270,7 +270,7 @@ public class Game {
 
             // % chance of creating a thief card
             else {
-                mixedDeck.add(new ThiefCard());
+                mixedDeck.add(new SpyCard());
             }
         }
     }

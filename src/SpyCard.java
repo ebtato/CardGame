@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
-public class ThiefCard extends Card {
+public class SpyCard extends Card {
 
-    public ThiefCard() {
+    public SpyCard() {
         // Thief card settings
         int pointValue = -1; // costs 1 point to use
 
