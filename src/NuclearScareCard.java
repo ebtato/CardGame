@@ -40,14 +40,11 @@ public class NuclearScareCard extends Card implements DealsDamage {
         }
 
         // afflictedPlayers list, pretty suboptimal but for some reason this card attacks certain subjects twice
-        List<Player> afflictedPlayers = new  ArrayList<Player>();
-        for (Player afflictedPlayer : allPlayers) {
-            if (afflictedPlayer.equals(currentPlayer) || afflictedPlayers.contains(afflictedPlayer)) {
-                continue;
-            } else {
-                doDamage(currentPlayer, afflictedPlayer);
-                afflictedPlayers.add(afflictedPlayer);
-            }
+        List<Player> attackingPlayers = new ArrayList<>(allPlayers);
+        attackingPlayers.remove(currentPlayer);
+        for (Player afflictedPlayer : attackingPlayers) {
+            System.err.println("did damage, the problem is here");
+            doDamage(currentPlayer, afflictedPlayer);
           }
 
     }
@@ -55,6 +52,7 @@ public class NuclearScareCard extends Card implements DealsDamage {
     @Override
     public void doDamage(Player currentPlayer, Player playerToDamage) {
         playerToDamage.removePoints(damage);
+        System.err.println("called doDamage");
         System.out.println(currentPlayer.getName() + " did " + damage + " damage to " + playerToDamage.getName() + ". " + "(Points after: " + playerToDamage.getNumPoints() + ")");
 //        System.out.println(playerToDamage.getName() + " now has " + playerToDamage.getNumPoints() + " points.\n");
     }
