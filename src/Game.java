@@ -170,18 +170,11 @@ public class Game {
                 }
             }
 
+            currentPlayer.updatePhase(testThreshold1, testThreshold2, pointsToWin);
+
             // check for rocket test phase
-            if(currentPlayer.getNumPoints() >= testThreshold1 && currentPlayer.getTotRocketTests() < 1){
-                currentPlayer.testRocket();
-            }
-            else if(currentPlayer.getNumPoints() < testThreshold1 && currentPlayer.getTotRocketTests() >= 1){
-                currentPlayer.setBackTestProgress();
-            }
-            else if(currentPlayer.getNumPoints() >= testThreshold2 && currentPlayer.getTotRocketTests() < 2){
-                currentPlayer.testRocket();
-            }
-            else if(currentPlayer.getNumPoints() < testThreshold2 && currentPlayer.getTotRocketTests() >= 2){
-                currentPlayer.setBackTestProgress();
+            if(!currentPlayer.isRocketTested() && currentPlayer.getPhase() > 1){
+                currentPlayer.testRocket(testThreshold1, testThreshold2);
             }
 
             Input.waitForUserToPressEnter("\nPress Enter to end " + currentPlayer.getName() + "'s turn.\n");
@@ -213,7 +206,7 @@ public class Game {
 
 
         // Deck settings
-        totalNumberOfCards = 20;
+        totalNumberOfCards = 200;
         chancesOfDamageCardBeingInDamageDeck = 0.4f;
 
         pointCardChances = 0.5f; // must be between 0 and 1

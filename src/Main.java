@@ -9,6 +9,7 @@ public class Main {
         game.registerPlayer(p2);
         game.registerPlayer(p3);
 
+
         game.run();
     }
 }

@@ -11,6 +11,13 @@ public class Player {
 
     private float rocketTestFailChance;
     public float getRocketTestFailChance() { return rocketTestFailChance; }
+
+    private int phase;
+    public int getPhase() { return phase; }
+
+    private boolean rocketTested;
+    public boolean isRocketTested() { return rocketTested; }
+
     public void addCardToTestDeck(int i){
         switch (i){
 
@@ -55,6 +62,7 @@ public class Player {
             }
         }
 
+        /*
         // do possible additional damage action
         if (randomCard instanceof DealsDamage) {
             DealsDamage damageCard = (DealsDamage)randomCard;
@@ -66,30 +74,88 @@ public class Player {
             AppliesFreeze freezeCard = (AppliesFreeze)randomCard;
             freezeCard.freeze(this, otherPlayer);
         }
+
+         */
     }
 
-    public void testRocket(){
+    public void updatePhase(float thresh1, float thresh2, float thresh3){
+
+        int initPhase = phase;
+        if(numPoints <= thresh1){
+            phase = 1;
+        }
+        else if(numPoints > thresh1 && numPoints <= thresh2){
+            phase = 2;
+        }
+        else if(numPoints > thresh2 && numPoints < thresh3){
+            phase = 3;
+        }
+        else{
+            // final launch phase
+            phase = 4;
+        }
+
+        // if the phase increases then allow test to be performed
+        // if pushed back one phase, nothing will happen until coming back up to test again
+        if(initPhase < phase){
+            rocketTested = false;
+        }
+    }
+
+    public void testRocket(float thresh1, float thresh2){
         // "draw" test card from "draw pile"
         // not a real draw pile, but simply a probability of successful or failed test
         // that way certain in-game decisions can affect the chances of good/bad tests
         // simulates adding good/bad cards to the pile to change probabilities,
         // without actually adding cards to a pile and giving each player a separate draw pile.
-        System.out.println("It's time for "+name+" to test their rocket!");
+
+        if(phase < 4){
+            System.out.println("It's time for "+name+" to test their rocket!");
+        }
+        else{
+            System.out.println("It's time for "+name+"'s final launch!");
+        }
 
         float num = Rand.randomFloat(0f,1f);
         if(num < rocketTestFailChance){
-            System.out.println("ROCKET TEST FAILED!");
+
+            if(phase < 4){
+                System.out.println("ROCKET TEST FAILED!");
+            }
+            else{
+                System.out.println("ROCKET LAUNCH FAILED!");
+            }
+            setBackTestProgress(thresh1, thresh2);
         }
         else{
-            System.out.println("Rocket Test Success!");
+
+            if(phase < 4){
+                System.out.println("Rocket Test Success!");
+            }
+            else{
+                System.out.println("Rocket Launch Success!");
+            }
         }
 
-        totRocketTests++;
+        rocketTested = true;
     }
 
-    public void setBackTestProgress(){
-        System.out.println("Pushed back one phase");
-        totRocketTests--;
+    public void setBackTestProgress(float thresh1, float thresh2){
+
+        switch(phase){
+
+            case 2:
+                numPoints = 0;
+                break;
+            case 3:
+                numPoints = (int)thresh1 + 1;
+                break;
+            case 4:
+                numPoints = (int)thresh2 + 1;
+                break;
+            default:
+                break;
+        }
     }
 
     public boolean hasCardsInHand() {
