@@ -19,9 +19,7 @@ public class NuclearScareCard extends Card implements DealsDamage {
         this.damage = Rand.randomInt(minDamage, maxDamage + 1);
 
         // Points gained from playing this card
-        int minPoints = 1;
-        int maxPoints = 2;
-        int pointValue = Rand.randomInt(minPoints, maxPoints + 1);
+        int pointValue = 0;
 
         super(pointValue);
     }
@@ -41,7 +39,7 @@ public class NuclearScareCard extends Card implements DealsDamage {
 
         // afflictedPlayers list, pretty suboptimal but for some reason this card attacks certain subjects twice
         List<Player> attackingPlayers = new ArrayList<>(allPlayers);
-        attackingPlayers.remove(currentPlayer);
+        //attackingPlayers.remove(currentPlayer);
         for (Player afflictedPlayer : attackingPlayers) {
             System.err.println("did damage, the problem is here");
             doDamage(currentPlayer, afflictedPlayer);

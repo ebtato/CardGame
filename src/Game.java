@@ -16,6 +16,7 @@ public class Game {
     private float pointCardChances; // % chance (from 0-1) of generating a point card
     private float attackCardChances; // % chance (from 0-1) of generating an attack card
     private float freezeCardChances; // % chance (from 0-1) of generating a freeze card
+    private float nuclearCardChances; // "                                 " nuclear scare card
     //private float thiefCardChances; // thief card chances are the leftovers of the other chances
 
     private float chancesOfDamageCardBeingInDamageDeck; // % chance of a generated damage card being added to the damage-only deck
@@ -37,6 +38,8 @@ public class Game {
     // ------ End of Game Objects ----- //
 
     // --------- Debugging Variables --------- //
+
+    private int turns;
 
     public int getPointsToWin() { return pointsToWin; }
     public float getTestThreshold(int i){
@@ -105,6 +108,11 @@ public class Game {
             if (currentPlayerIndex >= players.size()) {
                 currentPlayerIndex = 0;
             }
+
+            if(currentPlayerIndex == 0){
+                turns++;
+            }
+
             currentPlayer = players.get(currentPlayerIndex);
 
             System.out.println("\n# cards remaining in Mixed deck: " + mixedDeck.size() + ".");
@@ -147,27 +155,32 @@ public class Game {
             // 3. OR draw a card from damage deck and use its damage effect immediately, without getting points
             else {
                 Object drawnObject = drawRandomCard(damageDeck);
+                Card card = (Card)drawnObject;
+
                 DealsDamage damageCard = (DealsDamage)drawnObject;
 
                 System.out.println(currentPlayer.getName() + " drew a " + damageCard + " from the Damage deck.");
 
                 // pick a random player (but not oneself) to apply the damage card to
-                boolean selectedAnotherPlayer = false;
-                Player otherPlayer = null;
+//                boolean selectedAnotherPlayer = false;
+//                Player otherPlayer = null;
+//
+//                while (!selectedAnotherPlayer) {
+//                    int randomPlayerIndex = Rand.randomInt(0, players.size());
+//                    otherPlayer = players.get(randomPlayerIndex);
+//                    if (otherPlayer != currentPlayer) {
+//                        selectedAnotherPlayer = true;
+//                    }
+//                }
+//
+//                damageCard.doDamage(currentPlayer, otherPlayer);
+//                if (damageCard instanceof AppliesFreeze) {
+//                    AppliesFreeze freezeCard = (AppliesFreeze)damageCard;
+//                    freezeCard.freeze(currentPlayer, otherPlayer);
+//                }
 
-                while (!selectedAnotherPlayer) {
-                    int randomPlayerIndex = Rand.randomInt(0, players.size());
-                    otherPlayer = players.get(randomPlayerIndex);
-                    if (otherPlayer != currentPlayer) {
-                        selectedAnotherPlayer = true;
-                    }
-                }
+                card.play(currentPlayer, players);
 
-                damageCard.doDamage(currentPlayer, otherPlayer);
-                if (damageCard instanceof AppliesFreeze) {
-                    AppliesFreeze freezeCard = (AppliesFreeze)damageCard;
-                    freezeCard.freeze(currentPlayer, otherPlayer);
-                }
             }
 
             currentPlayer.updatePhase(testThreshold1, testThreshold2, pointsToWin);
@@ -178,10 +191,13 @@ public class Game {
             }
 
             Input.waitForUserToPressEnter("\nPress Enter to end " + currentPlayer.getName() + "'s turn.\n");
-        }
 
-        // End game: determine which Player had the most points
-        declareWinner();
+            // End game: determine which Player had the most points
+            if (currentPlayer.getPhase() == 9){
+                declareWinner();
+                break;
+            }
+        }
     }
 
     // Randomly selects a reference (Card or DealsDamage) from an ArrayList (mixedDeck or damageDeck).
@@ -212,6 +228,7 @@ public class Game {
         pointCardChances = 0.5f; // must be between 0 and 1
         attackCardChances = 0.25f; // must be between 0 and 1
         freezeCardChances = 0.15f; // must be between 0 and 1
+        nuclearCardChances = 0.25f;
 
         // thief card chances should be positive based on the math, but check just to be safe
         float thiefCardChances = 1f - (pointCardChances + attackCardChances + freezeCardChances);
@@ -236,6 +253,17 @@ public class Game {
             // % chance of creating a point card
             if (randomValue < pointCardChances) {
                 mixedDeck.add(new PointCard());
+            }
+
+            else if (randomValue < pointCardChances + nuclearCardChances){
+
+                NuclearScareCard newNuclearCard = new NuclearScareCard();
+
+                if (Rand.random() < chancesOfDamageCardBeingInDamageDeck) {
+                    damageDeck.add(newNuclearCard);
+                } else {
+                    mixedDeck.add(newNuclearCard);
+                }
             }
 
 
@@ -285,5 +313,7 @@ public class Game {
         }
 
         System.out.println("Player '" + playerWithHighestScore.getName() + "' wins!");
+
+        System.out.println("\n\nTurns: "+turns);
     }
 }

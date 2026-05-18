@@ -134,6 +134,9 @@ public class Player {
             }
             else{
                 System.out.println("Rocket Launch Success!");
+
+                // set phase to 9 to denote end game, as the player has won.
+                phase = 9;
             }
         }
 
