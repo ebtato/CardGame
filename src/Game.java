@@ -14,9 +14,10 @@ public class Game {
     // Deck settings
     private int totalNumberOfCards;
     private float pointCardChances; // % chance (from 0-1) of generating a point card
-    private float attackCardChances; // % chance (from 0-1) of generating an attack card
+    //private float attackCardChances; // % chance (from 0-1) of generating an attack card
     private float freezeCardChances; // % chance (from 0-1) of generating a freeze card
     private float nuclearCardChances; // "                                 " nuclear scare card
+    private float sabotageCardChances; // "                                 " sabotage card
     //private float thiefCardChances; // thief card chances are the leftovers of the other chances
 
     private float chancesOfDamageCardBeingInDamageDeck; // % chance of a generated damage card being added to the damage-only deck
@@ -226,12 +227,13 @@ public class Game {
         chancesOfDamageCardBeingInDamageDeck = 0.4f;
 
         pointCardChances = 0.5f; // must be between 0 and 1
-        attackCardChances = 0.25f; // must be between 0 and 1
-        freezeCardChances = 0.15f; // must be between 0 and 1
-        nuclearCardChances = 0.25f;
+        //attackCardChances = 0.25f; // must be between 0 and 1
+        freezeCardChances = 0.1f; // must be between 0 and 1
+        nuclearCardChances = 0.1f;
+        sabotageCardChances = 0.2f;
 
         // thief card chances should be positive based on the math, but check just to be safe
-        float thiefCardChances = 1f - (pointCardChances + attackCardChances + freezeCardChances);
+        float thiefCardChances = 1f - (pointCardChances + nuclearCardChances + sabotageCardChances + freezeCardChances);
         if (thiefCardChances < 0f) {
             System.out.println("ERROR: Card chances are not all positive.");
         }
@@ -266,6 +268,13 @@ public class Game {
                 }
             }
 
+            else if (randomValue < pointCardChances + nuclearCardChances + sabotageCardChances){
+
+                SabotageCard sabotageCard = new SabotageCard();
+
+                damageDeck.add(sabotageCard);
+            }
+
 
             // % chance of creating an attack card
            /* else if (randomValue < pointCardChances + attackCardChances) {
@@ -279,7 +288,7 @@ public class Game {
             } */
 
             // % chance of creating a freeze card
-            else if (randomValue < pointCardChances + attackCardChances + freezeCardChances) {
+            else if (randomValue < pointCardChances + nuclearCardChances + sabotageCardChances + freezeCardChances) {
                 FreezeCard newFreezeCard = new FreezeCard();
 
                 if (Rand.random() < chancesOfDamageCardBeingInDamageDeck) {

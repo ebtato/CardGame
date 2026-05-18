@@ -109,34 +109,57 @@ public class Player {
         // simulates adding good/bad cards to the pile to change probabilities,
         // without actually adding cards to a pile and giving each player a separate draw pile.
 
-        if(phase < 4){
-            System.out.println("It's time for "+name+" to test their rocket!");
-        }
-        else{
-            System.out.println("It's time for "+name+"'s final launch!");
-        }
+        float chanceOfSkipTest = 0.3f;
 
-        float num = Rand.randomFloat(0f,1f);
-        if(num < rocketTestFailChance){
+        float chooseToTest = Rand.randomFloat(0,1);
+
+        if(chooseToTest > chanceOfSkipTest){
 
             if(phase < 4){
-                System.out.println("ROCKET TEST FAILED!");
+                System.out.println("It's time for "+name+" to test their rocket!");
             }
             else{
-                System.out.println("ROCKET LAUNCH FAILED!");
+                System.out.println("It's time for "+name+"'s final launch!");
             }
-            setBackTestProgress(thresh1, thresh2);
+
+            float num = Rand.randomFloat(0f,1f);
+            if(num < rocketTestFailChance){
+
+                if(phase < 4){
+                    System.out.println("ROCKET TEST FAILED!");
+                }
+                else{
+                    System.out.println("ROCKET LAUNCH FAILED!");
+                }
+                setBackTestProgress(thresh1, thresh2);
+            }
+            else{
+
+                if(phase < 4){
+                    System.out.println("Rocket Test Success!");
+                }
+                else{
+                    System.out.println("Rocket Launch Success!");
+
+                    // set phase to 9 to denote end game, as the player has won.
+                    phase = 9;
+                }
+            }
+
+            rocketTestFailChance -= 0.05f;
+            // ensure rocketTestFailChance doesn't get too low
+            if(rocketTestFailChance < 0.1f){
+                rocketTestFailChance = 0.1f;
+            }
+
         }
         else{
 
-            if(phase < 4){
-                System.out.println("Rocket Test Success!");
-            }
-            else{
-                System.out.println("Rocket Launch Success!");
-
-                // set phase to 9 to denote end game, as the player has won.
-                phase = 9;
+            System.out.println("Player "+name+" skipped their rocket test!");
+            rocketTestFailChance += 0.05f;
+            // ensure rocketTestFailChance doesn't get too high
+            if(rocketTestFailChance > 0.9f){
+                rocketTestFailChance = 0.9f;
             }
         }
 
