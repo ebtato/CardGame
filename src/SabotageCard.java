@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class SabotageCard extends Card implements DealsDamage {
+public class SabotageCard extends Card implements DealsDamage, AppliesFreeze {
 
     public SabotageCard() {
         // Sabotage card settings
@@ -26,6 +26,14 @@ public class SabotageCard extends Card implements DealsDamage {
     public void doDamage(Player currentPlayer, Player playerToDamage) {
 
         currentPlayer.removePoints(super.getPointValue());
+        freeze(currentPlayer, currentPlayer);
+    }
+
+    @Override
+    public void freeze(Player currentPlayer, Player playerToFreeze) {
+
+        playerToFreeze.freeze();
+        System.out.println("Player "+playerToFreeze.getName()+" was frozen by the sabotage!");
     }
 }
 
