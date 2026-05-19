@@ -25,12 +25,32 @@ space race:
 
 
 --- full rules for this game ---
-- object of the game is to be the first one to build and launch rocket
-- turn system the same as base
-- rocket progress is based on pts; more pts = more progress
-- when a rocket is built and ready for launch, a launch card must be drawn and played.
-    - if the launch card is SUCCESS then the player wins.
-    - if the launch card is FAILURE then the player loses progress.
+The goal of the game is to be the first player to build and launch their rocket.
+Each player starts with 5 points. Points can increase and decrease as the game progresses, but cannot be negative.
+The game ends when a player successfully launches their rocket.
+
+Players gain and lose points by playing cards. Different types of cards increase/decrease points differently and may affect other players.
+
+There are 4 types of cards:
+-- Progress card: The Player who plays it gains points (6-10 points).
+-- Nuclear Scare card: All players lose points (4-6 points).
+-- Sabotage card: Only drawn from the damage deck, the player who draws it loses points (1-4 points).
+-- Freeze card: Freezes another player for one turn. Also reduces the other Player's points (by 4-6 points) The Player who plays it also gains points (1-2 points).
+-- Spy card: The Player who plays it steals a card from another Player and places it in their hand. Costs 1 point to play.
+
+Players start with 3 random cards in hand. The remaining cards start in two decks:
+-- the Mixed Deck that contains a mixture of all card types
+-- the Damage Deck that contains a mixture of only cards that can do damage
+
+Each turn, a Player can choose one of 3 options:
+-- 1. Play a card from their hand
+-- 2. Draw a random card from the Mixed Deck. They do not get to play it.
+-- 3. Draw a random card from the Damage Deck. They must play it immediately, and they do not gain points from playing it, but other Players lose points.
+
+If a player crosses one of three checkpoints, they have the option to test their rocket.
+The final checkpoint is the rocket launch.  If any test/launch is unsuccessful, the player is pushed back to the start of the phase.
+Choosing to skip a rocket test will increase your chances of failure in proceeding tests/launches.
+
 
 === THINGS TO BE DONE ===
 retexture base v
